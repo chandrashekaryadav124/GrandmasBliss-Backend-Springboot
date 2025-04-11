@@ -1,6 +1,5 @@
 package com.grandmasbliss.grandma.controller;
 
-
 import com.grandmasbliss.grandma.model.Product;
 import com.grandmasbliss.grandma.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,12 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+    // ✅ Enhanced: Support type filtering via query param
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts(@RequestParam(required = false) String type) {
+        if (type != null && !type.isEmpty()) {
+            return productService.getProductsByType(type);
+        }
         return productService.getAllProducts();
     }
 

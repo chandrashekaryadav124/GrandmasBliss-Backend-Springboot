@@ -17,4 +17,5 @@ public class Product {
     private String imageUrl;
     private String categoryId; // Reference to ProductCategory
     private boolean isVeg;
+    private String type; // NEW: "sweets", "veg-pickle", "nonveg-pickle", etc.
 }

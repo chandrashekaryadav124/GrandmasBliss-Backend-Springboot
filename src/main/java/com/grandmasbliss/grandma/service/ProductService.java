@@ -1,6 +1,5 @@
 package com.grandmasbliss.grandma.service;
 
-
 import com.grandmasbliss.grandma.model.Product;
 import com.grandmasbliss.grandma.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,11 @@ public class ProductService {
         return productRepository.findByCategoryId(categoryId);
     }
 
+    // ✅ NEW: Filter products by type
+    public List<Product> getProductsByType(String type) {
+        return productRepository.findByType(type);
+    }
+
     public Product updateProduct(String id, Product updatedProduct) {
         return productRepository.findById(id)
                 .map(product -> {
@@ -40,6 +44,7 @@ public class ProductService {
                     product.setImageUrl(updatedProduct.getImageUrl());
                     product.setCategoryId(updatedProduct.getCategoryId());
                     product.setVeg(updatedProduct.isVeg());
+                    product.setType(updatedProduct.getType()); // ✅ Set type too
                     return productRepository.save(product);
                 }).orElse(null);
     }
